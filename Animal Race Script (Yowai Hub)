@@ -1,0 +1,152 @@
+-- Lib
+
+local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+
+-- Gui
+
+local GUI = Mercury:Create{
+    Name = "YowaiHub",
+    Size = UDim2.fromOffset(600, 400),
+    Theme = Mercury.Themes.Dark,
+    Link = "SubToScripter_Yowai"
+}
+
+-- Main Tab
+local AutoFarmTab = GUI:Tab{
+        Name = "AutoFarm",
+        Icon = "rbxassetid://8569322835"
+}
+
+-- local variables 
+local autoclick = false
+
+local influckpotion = false
+
+local infwinpotion = false
+
+local infstrengthpotion = false
+
+local autorebirth = false
+
+local infwin = false
+
+-- Toggel For AutoClick
+AutoFarmTab:Toggle{
+	Name = "AutoClick",
+	StartingState = false,
+	Description = "AutoClicks",
+	Callback = function(state) 
+	autoclick = state
+	while autoclick do
+
+game:GetService("ReplicatedStorage").Remotes.Training.Train:FireServer("Click28","Sewer")
+     wait()
+   end
+end
+}
+
+-- Toggel For Infx2luck
+AutoFarmTab:Toggle{
+	Name = "Inf Luck Potion",
+	StartingState = false,
+	Description = "OnForLuckPotion",
+	Callback = function(state) 
+	influckpotion = state
+	while influckpotion do
+	
+game:GetService("ReplicatedStorage").Remotes.Multiplier.UpdateMultiplier:FireServer("x2Luck",900,"Potion")
+     wait()
+    end
+   end
+ }
+
+-- Toggel For Infx2winPotion
+AutoFarmTab:Toggle{
+	Name = "Inf Win Potion",
+	StartingState = false,
+	Description = "OnForWinPotion",
+	Callback = function(state) 
+	infwinpotion = state
+	while infwinpotion do
+
+	game:GetService("ReplicatedStorage").Remotes.Multiplier.UpdateMultiplier:FireServer("x2Wins",900,"Potion")
+     wait()
+   end
+  end
+ }
+  
+  -- Toggel For Infx2strength
+AutoFarmTab:Toggle{
+	Name = "Inf Strength Potion",
+	StartingState = false,
+	Description = "OnForStrengthPotion",
+	Callback = function(state) 
+	infstrengthpotion = state
+	while infstrengthpotion do
+	
+game:GetService("ReplicatedStorage").Remotes.Multiplier.UpdateMultiplier:FireServer("x2Strength",900,"Potion")
+     wait()
+    end
+   end
+ }
+ 
+ -- Toggel For AutoRebirth
+AutoFarmTab:Toggle{
+	Name = "Autorebirth",
+	StartingState = false,
+	Description = "AutoRebirths",
+	Callback = function(state)
+    autorebirth = state
+    while autorebirth do
+    game:GetService("ReplicatedStorage").Remotes.Rebirth.Rebirth:InvokeServer("Wins")
+    wait()
+   end
+  end
+ }
+ 
+ -- Toggel For InfWins
+ 
+AutoFarmTab:Toggle{
+	Name = "Inf Wins",
+	StartingState = false,
+	Description = "OnForInfWins",
+	Callback = function(state) 
+	infwin = state
+	while infwin do
+
+game:GetService("ReplicatedStorage").Remotes.Race.AwardRace:FireServer("Mars",4)
+     wait()
+    end
+   end
+ }
+ 
+ -- Button GettingBestPet
+AutoFarmTab:Button{
+	Name = "GetBestPet",
+	Description = "Can do multiple times just rejoin",
+	Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Eggs.Hatch:InvokeServer("Girl Egg",1)
+end
+}
+ -- Button EquipBest
+AutoFarmTab:Button{
+	Name = "EquipBestPet",
+	Description = "EquipsBestpet",
+	Callback = function()
+
+game:GetService("ReplicatedStorage").Remotes.Pets.EquipBestPets:FireServer()
+end
+}
+
+local function showNotification(message)
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Credits",
+            Text = message,
+            Duration = 5
+        })
+    end
+end
+
+local creditsMessage = "Credits to ScripterYowai"
+showNotification(creditsMessage)
